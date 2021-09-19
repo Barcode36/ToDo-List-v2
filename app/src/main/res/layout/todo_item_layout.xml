@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="15dp"
+    app:cardUseCompatPadding="true"
+    android:elevation="4dp"
+    android:backgroundTint="@color/primary_grey">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/todo_relative"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="6dp">
+
+            <CheckBox
+                android:id="@+id/todo_checkbox"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="6dp"
+                android:layout_centerVertical="true"/>
+
+            <LinearLayout
+                android:id="@+id/todo_linear2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/todo_checkbox"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/todo_checkbox"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/todo_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textSize="@dimen/font_size_16"
+                    android:textStyle="bold"
+                    android:text="@string/example_task"/>
+
+<!--                <TextView-->
+<!--                    android:id="@+id/topic_text"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:textSize="@dimen/font_size_16"-->
+<!--                    android:text="@string/example_topic"/>-->
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

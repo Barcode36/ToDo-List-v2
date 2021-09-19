@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">ToDo</string>
+    <string name="add_todo_title">Add some TODOs!</string>
+
+    <string name="add_text">Add!</string>
+
+    <string name="add_todo_hint0">Read "Atomic habits" for 30 mins...</string>
+    <string name="add_todo_hint1">Do my WOD with friends...</string>
+    <string name="add_todo_hint2">Study for the coding interview...</string>
+    <string name="add_todo_hint3">Buy a new notebook for class...</string>
+    <string name="add_todo_hint4">Practice german for 1h today...</string>
+    <string name="add_todo_hint5">Visit grandparents after lunch...</string>
+
+    <string name="example_task">Example task</string>
+    <string name="example_topic">Work</string>
+</resources>
