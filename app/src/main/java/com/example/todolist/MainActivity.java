@@ -50,14 +50,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        checkBox.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (checkBox.isChecked()) {
-                    //TODO: Create modify and delete features for to dos
-                }
-            }
-        });
+//        checkBox.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (checkBox.isChecked()) {
+//                    //TODO: Create modify and delete features for to dos
+//                }
+//            }
+//        });
 
     }
 

@@ -13,4 +13,8 @@
 
     <string name="example_task">Example task</string>
     <string name="example_topic">Work</string>
+    <string name="add_new_todo_title">Add something ToDo</string>
+    <string name="add_new_todo_hint">I\'ll go to the gym at 18:30...</string>
+    <string name="add">Add</string>
+    <string name="add_task_content_description">Add task</string>
 </resources>

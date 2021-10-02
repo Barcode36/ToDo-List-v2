@@ -30,7 +30,8 @@
         android:clickable="true"
         android:elevation="4dp"
         android:src="@drawable/ic_baseline_add_24"
-        android:contentDescription="Add task" />
+        android:contentDescription="@string/add_task_content_description"
+        android:focusable="true" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/todos_recycler_view"
