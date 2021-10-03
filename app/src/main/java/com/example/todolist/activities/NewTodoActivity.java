@@ -1,4 +1,4 @@
-package com.example.todolist;
+package com.example.todolist.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.todolist.R;
 import com.example.todolist.data.TodoDB;
 
 public class NewTodoActivity extends AppCompatActivity {

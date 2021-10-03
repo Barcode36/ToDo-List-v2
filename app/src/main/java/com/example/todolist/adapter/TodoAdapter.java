@@ -2,7 +2,6 @@ package com.example.todolist.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.todolist.DetailedTodoActivity;
+import com.example.todolist.activities.DetailTodoActivity;
 import com.example.todolist.R;
 import com.example.todolist.model.Todo;
 
@@ -72,7 +71,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoHolder>{
                 public void onClick(View v) {
                     Context context = itemView.getContext();
 
-                    Intent intent = new Intent(context, DetailedTodoActivity.class);
+                    Intent intent = new Intent(context, DetailTodoActivity.class);
                     intent.putExtra("Id", listTodos.get(getAdapterPosition()).getId());
 
                     context.startActivity(intent);

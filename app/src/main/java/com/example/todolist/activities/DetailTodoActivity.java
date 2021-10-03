@@ -1,4 +1,4 @@
-package com.example.todolist;
+package com.example.todolist.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,20 +6,23 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.example.todolist.R;
 import com.example.todolist.data.TodoDB;
 import com.example.todolist.model.Todo;
 
-public class DetailedTodoActivity extends AppCompatActivity {
+public class DetailTodoActivity extends AppCompatActivity {
 
     //Declaring the UI in our activity
     private EditText todoText;
     private Button saveButton;
-    private Button goBackButton;
+    private Button cancelButton;
 
     //Instantiating a new To Do object and its id on the DB
-    Todo todo;
-    int id;
+    private Todo todo;
+    private int id;
+    private boolean successfullyUpdated;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +31,7 @@ public class DetailedTodoActivity extends AppCompatActivity {
 
         todoText = findViewById(R.id.editTodoEditText);
         saveButton = findViewById(R.id.saveEditTodoButton);
-        goBackButton = findViewById(R.id.goBackEditTodoButton);
+        cancelButton = findViewById(R.id.goBackEditTodoButton);
 
         //We check if savedInstanceState already contains the info we need to fill our editText
         if (savedInstanceState == null) {
@@ -54,14 +57,30 @@ public class DetailedTodoActivity extends AppCompatActivity {
             todoText.setText(todo.getTitle());
         }
 
+        //Handling tap in the "Save" button and calling the method we created to update the to do
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Save in the DB
+                //Checking if there's text in the editText where the user modifies the To Do
+                if (todoText.getText().length() > 0) {
+                    successfullyUpdated = todoDB.editTodo(id, todoText.getText().toString(), todoDB.getTodo(id).isDone());
+
+                    //If the update was successful, we notify the user and move to the To Do's list. If it wasn't, we just notify and stay
+                    if (successfullyUpdated) {
+                        Toast.makeText(DetailTodoActivity.this, "Your ToDo was updated! :)", Toast.LENGTH_SHORT).show();
+                        finish();
+                    } else {
+                        Toast.makeText(DetailTodoActivity.this, "There was an error I need to solve :/", Toast.LENGTH_SHORT).show();
+                    }
+
+                } else {
+                    Toast.makeText(DetailTodoActivity.this, "This ToDo will be empty now :(", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
-        goBackButton.setOnClickListener(new View.OnClickListener() {
+        //Handling tap in the "Cancel / Back" Button to get the user to the MainActivity
+        cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();

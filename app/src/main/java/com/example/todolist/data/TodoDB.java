@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class TodoDB extends DbHelper {
 
-    Context context;
+    private Context context;
 
     //Creating a constructor for our class, extending DbHelper to use its data
     public TodoDB(@Nullable Context context) {
@@ -54,7 +54,7 @@ public class TodoDB extends DbHelper {
 
         //This SQL query will try update the title, and if it is done or not in the DB
         try {
-            db.execSQL("UPDATE " + TODOS_TABLE_NAME + " SET title = '" + todoTitle + "'" + " SET done = '" + todoDone + "'" + " WHERE id = '" + id + "' ");
+            db.execSQL("UPDATE " + TODOS_TABLE_NAME + " SET title = '" + todoTitle + "', done = '" + todoDone + "' WHERE id='" + id + "' ");
             updateSuccessful = true;
         } catch (Exception e) {
             e.toString();
