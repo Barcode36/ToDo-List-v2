@@ -54,6 +54,9 @@ public class TodoDB extends DbHelper {
 
         //This SQL query will try update the title, and if it is done or not in the DB
         try {
+            /*TODO: Change this to another method, because when I introduce "I'll" I break the SQL
+            https://stackoverflow.com/questions/24589411/special-characters-in-sqlitedatabase-android
+             */
             db.execSQL("UPDATE " + TODOS_TABLE_NAME + " SET title = '" + todoTitle + "', done = '" + todoDone + "' WHERE id='" + id + "' ");
             updateSuccessful = true;
         } catch (Exception e) {
