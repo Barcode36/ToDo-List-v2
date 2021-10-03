@@ -3,7 +3,7 @@ package com.example.todolist.model;
 import android.content.ContentValues;
 
 /**
- * This is our Model for a todo item
+ * This is our Model for a to do item
  * It contains a title and a boolean to check if the task is completed or not
  */
 
@@ -11,10 +11,12 @@ public class Todo {
 
     private String title;
     private boolean done;
+    private int id;
 
-    public Todo(String title, boolean done) {
+    public Todo(String title, boolean done, int id) {
         this.title = title;
         this.done = done;
+        this.id = id;
     }
 
     public Todo() {
@@ -37,4 +39,11 @@ public class Todo {
         this.done = done;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }

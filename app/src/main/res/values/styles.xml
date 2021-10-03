@@ -13,4 +13,8 @@
         <item name="android:textSize">26sp</item>
         <item name="android:textStyle">bold</item>
     </style>
+
+    <style name="regular_button_style">
+        <item name="cornerRadius">10dp</item>
+    </style>
 </resources>

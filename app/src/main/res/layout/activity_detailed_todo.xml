@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/secondary_color"
-    tools:context=".NewTodoActivity">
+    tools:context=".DetailedTodoActivity">
 
     <TextView
         android:id="@+id/detailedToDoTitle"
         style="@style/activity_title_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/add_new_todo_title"
+        android:text="Edit your ToDo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,24 +24,20 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:background="@drawable/todo_add_background"
-        android:hint="@string/add_new_todo_hint"
-        android:textColorHint="@color/secondary_grey"
+        android:padding="16dp"
         android:textColor="@color/secondary_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/detailedToDoTitle"
-        app:layout_constraintVertical_bias="0.0"
-        android:maxLength="30"
-        android:maxLines="1"
-        android:padding="16dp"/>
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/addNewTodoButton"
+        android:id="@+id/saveEditTodoButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -52,15 +48,12 @@
         android:text="@string/save"
         android:textStyle="bold"
         style="@style/regular_button_style"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTodoEditText"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/editTodoEditText" />
 
     <Button
-        android:id="@+id/goBackNewTodoButton"
-        style="@style/regular_button_style"
+        android:id="@+id/goBackEditTodoButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -68,11 +61,11 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:text="@string/back"
+        android:text="@string/cancel"
         android:textStyle="bold"
+        style="@style/regular_button_style"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addNewTodoButton" />
-
+        app:layout_constraintTop_toBottomOf="@+id/saveEditTodoButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

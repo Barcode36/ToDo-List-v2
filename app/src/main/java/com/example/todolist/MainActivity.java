@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 //            public void onClick(View v) {
 //                if (checkBox.isChecked()) {
 //                    //TODO: Create modify and delete features for to dos
-//                }z
+//                }
 //            }
 //        });
 

@@ -14,28 +14,37 @@ import com.example.todolist.data.TodoDB;
 
 public class NewTodoActivity extends AppCompatActivity {
 
-    private EditText editText;
-    private Button button;
+    private EditText toDoEditText;
+    private Button saveButton;
+    private Button goBackButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_todo);
 
-        editText = findViewById(R.id.editTextNewTodo);
-        button = findViewById(R.id.addNewTodoButton);
+        toDoEditText = findViewById(R.id.editTodoEditText);
+        saveButton = findViewById(R.id.addNewTodoButton);
+        goBackButton = findViewById(R.id.goBackNewTodoButton);
 
         TodoDB db = new TodoDB(getApplicationContext());
 
-        button.setOnClickListener(new View.OnClickListener() {
+        saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (editText.getText().equals("")) {
-                    Toast.makeText(NewTodoActivity.this, "", Toast.LENGTH_SHORT).show();
+                if (toDoEditText.getText().length() == 0) {
+                    Toast.makeText(getBaseContext(), "Nothing to save :(", Toast.LENGTH_SHORT).show();
                 } else {
-                    long id = db.insertTodo(editText.getText().toString(), false);
+                    long id = db.insertTodo(toDoEditText.getText().toString(), false);
                     cleanUpAndSetup();
                 }
+            }
+        });
+
+        goBackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
 
@@ -45,7 +54,7 @@ public class NewTodoActivity extends AppCompatActivity {
      * Method to clean the editText and close the soft keyboard
      */
     private void cleanUpAndSetup() {
-        editText.setText("");
+        toDoEditText.setText("");
 
         View view = this.getCurrentFocus();
         if (view != null) {
