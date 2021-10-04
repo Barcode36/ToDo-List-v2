@@ -44,6 +44,7 @@ public class NewTodoActivity extends AppCompatActivity {
                     if (successfullyCreated) {
                         Toast.makeText(NewTodoActivity.this, "Your ToDo was created :)", Toast.LENGTH_SHORT).show();
                         cleanUpAndSetup();
+                        finish();
                     } else {
                         Toast.makeText(NewTodoActivity.this, "There was an error I need to solve :/", Toast.LENGTH_SHORT).show();
                     }

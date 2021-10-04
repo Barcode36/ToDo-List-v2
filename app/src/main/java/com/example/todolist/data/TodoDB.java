@@ -39,6 +39,7 @@ public class TodoDB extends DbHelper {
         db.insert(TODOS_TABLE_NAME, null, contentValues);
         } catch (Exception e) {
             Log.d("DB Exception", "Can't insert to do");
+            updateSuccessful = false;
         }
         return updateSuccessful;
     }

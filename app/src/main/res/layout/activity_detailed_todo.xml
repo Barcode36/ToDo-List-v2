@@ -12,7 +12,7 @@
         style="@style/activity_title_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Edit your ToDo"
+        android:text="@string/edit_your_todo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
