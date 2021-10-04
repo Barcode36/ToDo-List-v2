@@ -41,7 +41,7 @@ public class DetailTodoActivity extends AppCompatActivity {
             Bundle extras = getIntent().getExtras();
             if (extras != null) {
                 //And if they are not null, we get the Id we added to the intent extras'
-                id = extras.getInt("Id");
+                id = extras.getInt("id");
             } else {
                 id = Integer.parseInt(null);
             }
@@ -51,8 +51,8 @@ public class DetailTodoActivity extends AppCompatActivity {
         }
 
         //We instantiate our db and get the info for the desired item (with its id to get it from the db)
-        TodoDB todoDB = new TodoDB(this);
-        todo = todoDB.getTodo(id);
+        TodoDB db = new TodoDB(this);
+        todo = db.getTodo(id);
 
         //We check if the item is null and if not, we get the data from it to our activity UI
         if (todo != null) {
@@ -65,7 +65,7 @@ public class DetailTodoActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //Checking if there's text in the editText where the user modifies the To Do
                 if (todoText.getText().length() > 0) {
-                    successfullyUpdated = todoDB.editTodo(id, todoText.getText().toString(), todoDB.getTodo(id).isDone());
+                    successfullyUpdated = db.editTodo(id, todoText.getText().toString(), db.getTodo(id).isDone());
 
                     //If the update was successful, we notify the user and move to the To Do's list. If it wasn't, we just notify and stay
                     if (successfullyUpdated) {

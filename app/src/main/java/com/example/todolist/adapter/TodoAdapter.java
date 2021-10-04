@@ -72,7 +72,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoHolder>{
                     Context context = itemView.getContext();
 
                     Intent intent = new Intent(context, DetailTodoActivity.class);
-                    intent.putExtra("Id", listTodos.get(getAdapterPosition()).getId());
+                    intent.putExtra("id", listTodos.get(getAdapterPosition()).getId());
 
                     context.startActivity(intent);
                 }

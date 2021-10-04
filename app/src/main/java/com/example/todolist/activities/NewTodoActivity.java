@@ -16,7 +16,7 @@ import com.example.todolist.data.TodoDB;
 public class NewTodoActivity extends AppCompatActivity {
 
     //Declaring the UI in our activity
-    private EditText toDoEditText;
+    private EditText todoEditText;
     private Button saveButton;
     private Button goBackButton;
 
@@ -28,7 +28,7 @@ public class NewTodoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_todo);
 
-        toDoEditText = findViewById(R.id.editTodoEditText);
+        todoEditText = findViewById(R.id.editTodoEditText);
         saveButton = findViewById(R.id.addNewTodoButton);
         goBackButton = findViewById(R.id.goBackNewTodoButton);
 
@@ -37,8 +37,8 @@ public class NewTodoActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (toDoEditText.getText().length() > 0) {
-                    successfullyCreated = db.insertTodo(toDoEditText.getText().toString(), false);
+                if (todoEditText.getText().length() > 0) {
+                    successfullyCreated = db.insertTodo(todoEditText.getText().toString(), false);
 
                     //If the update was successful, we notify the user and move to the To Do's list. If it wasn't, we just notify and stay
                     if (successfullyCreated) {
@@ -67,7 +67,7 @@ public class NewTodoActivity extends AppCompatActivity {
      * Method to clean the editText and close the soft keyboard
      */
     private void cleanUpAndSetup() {
-        toDoEditText.setText("");
+        todoEditText.setText("");
 
         View view = this.getCurrentFocus();
         if (view != null) {

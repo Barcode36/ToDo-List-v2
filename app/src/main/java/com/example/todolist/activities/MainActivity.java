@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private CheckBox checkBox;
 
     //Instance of the DB and the Adapter for my recyclerView
-    private TodoDB todoDB;
+    private TodoDB db;
     private TodoAdapter todoAdapter;
 
     @Override
@@ -63,10 +63,10 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         //We create another db's instance to access data
-        todoDB = new TodoDB(MainActivity.this);
+        db = new TodoDB(MainActivity.this);
 
         //Instantiate TodoAdapter and pass getAllTodos from parameter. Set adapter to our recyclerView
-        todoAdapter = new TodoAdapter(todoDB.getAllTodos());
+        todoAdapter = new TodoAdapter(db.getAllTodos());
         recyclerView.setAdapter(todoAdapter);
     }
 
