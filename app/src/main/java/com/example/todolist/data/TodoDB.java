@@ -23,42 +23,44 @@ public class TodoDB extends DbHelper {
     }
 
     //This method allows us to insert todos in our db
-    public long insertTodo(String todoTitle, boolean todoDone) {
-        long id = 0;
+    public boolean insertTodo(String todoTitle, boolean todoDone) {
 
-        try {
+        //With this boolean we will check if the query execution was successful or not
+        boolean updateSuccessful = true;
+
         DbHelper dbHelper = new DbHelper(context);
         SQLiteDatabase db = dbHelper.getReadableDatabase();
+        ContentValues contentValues = new ContentValues();
 
-        ContentValues values = new ContentValues();
-        values.put("title", todoTitle);
-        values.put("done", todoDone);
+        try {
+        contentValues.put("title", todoTitle);
+        contentValues.put("done", todoDone);
 
-        id = db.insert(TODOS_TABLE_NAME, null, values);
-
+        db.insert(TODOS_TABLE_NAME, null, contentValues);
         } catch (Exception e) {
-            Log.d("DB Exception", "Can't insert todo");
+            Log.d("DB Exception", "Can't insert to do");
         }
-        return id;
+        return updateSuccessful;
     }
 
-    //This method allows us to insert todos in our db
+    //This method allows us to insert to dos in our db
     public boolean editTodo(int id, String todoTitle, boolean todoDone) {
 
         //With this boolean we will check if the query execution was successful or not
-        boolean updateSuccessful;
+        boolean updateSuccessful = true;
 
         //We make the DB readable to edit it
         DbHelper dbHelper = new DbHelper(context);
         SQLiteDatabase db = dbHelper.getReadableDatabase();
+        ContentValues contentValues = new ContentValues();
 
-        //This SQL query will try update the title, and if it is done or not in the DB
+        //This will update the data in our to dos
         try {
-            /*TODO: Change this to another method, because when I introduce "I'll" I break the SQL
-            https://stackoverflow.com/questions/24589411/special-characters-in-sqlitedatabase-android
-             */
-            db.execSQL("UPDATE " + TODOS_TABLE_NAME + " SET title = '" + todoTitle + "', done = '" + todoDone + "' WHERE id='" + id + "' ");
-            updateSuccessful = true;
+            //db.execSQL("UPDATE " + TODOS_TABLE_NAME + " SET title = '" + todoTitle + "', done = '" + todoDone + "' WHERE id='" + id + "' ");
+            contentValues.put("id", id);
+            contentValues.put("done", todoDone);
+            contentValues.put("title", todoTitle);
+            db.update(TODOS_TABLE_NAME, contentValues, "id = ?", new String[]{String.valueOf(id)});
         } catch (Exception e) {
             e.toString();
             updateSuccessful = false;

@@ -21,6 +21,8 @@ public class DetailTodoActivity extends AppCompatActivity {
 
     //Instantiating a new To Do object and its id on the DB
     private Todo todo;
+
+    //Declaring the private variables
     private int id;
     private boolean successfullyUpdated;
 

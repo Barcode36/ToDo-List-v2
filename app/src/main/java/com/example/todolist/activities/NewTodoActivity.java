@@ -15,9 +15,13 @@ import com.example.todolist.data.TodoDB;
 
 public class NewTodoActivity extends AppCompatActivity {
 
+    //Declaring the UI in our activity
     private EditText toDoEditText;
     private Button saveButton;
     private Button goBackButton;
+
+    //Declaring the private varibles
+    private boolean successfullyCreated;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,11 +37,18 @@ public class NewTodoActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (toDoEditText.getText().length() == 0) {
-                    Toast.makeText(getBaseContext(), "Nothing to save :(", Toast.LENGTH_SHORT).show();
+                if (toDoEditText.getText().length() > 0) {
+                    successfullyCreated = db.insertTodo(toDoEditText.getText().toString(), false);
+
+                    //If the update was successful, we notify the user and move to the To Do's list. If it wasn't, we just notify and stay
+                    if (successfullyCreated) {
+                        Toast.makeText(NewTodoActivity.this, "Your ToDo was created :)", Toast.LENGTH_SHORT).show();
+                        cleanUpAndSetup();
+                    } else {
+                        Toast.makeText(NewTodoActivity.this, "There was an error I need to solve :/", Toast.LENGTH_SHORT).show();
+                    }
                 } else {
-                    long id = db.insertTodo(toDoEditText.getText().toString(), false);
-                    cleanUpAndSetup();
+                    Toast.makeText(NewTodoActivity.this, "This ToDo will be empty :(", Toast.LENGTH_SHORT).show();
                 }
             }
         });
