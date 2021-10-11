@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.todolist.activities.DetailTodoActivity;
 import com.example.todolist.R;
+import com.example.todolist.data.TodoDB;
 import com.example.todolist.model.Todo;
 
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ import java.util.ArrayList;
 public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoHolder>{
 
     //Creating an ArrayList of to do objects
-    ArrayList<Todo> listTodos;
+    private final ArrayList<Todo> listTodos;
 
     //We create a constructor that needs an arrayList of to dos for fill our recyclerView
     public TodoAdapter(ArrayList<Todo> listTodos) {
@@ -77,6 +78,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoHolder>{
                     context.startActivity(intent);
                 }
             });
+
         }
 
     }

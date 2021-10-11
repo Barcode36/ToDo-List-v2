@@ -38,7 +38,7 @@ public class TodoDB extends DbHelper {
 
         db.insert(TODOS_TABLE_NAME, null, contentValues);
         } catch (Exception e) {
-            Log.d("DB Exception", "Can't insert to do");
+            Log.d("Exception", "insertTodo: " + e);
             updateSuccessful = false;
         }
         return updateSuccessful;
@@ -63,13 +63,35 @@ public class TodoDB extends DbHelper {
             contentValues.put("title", todoTitle);
             db.update(TODOS_TABLE_NAME, contentValues, "id = ?", new String[]{String.valueOf(id)});
         } catch (Exception e) {
-            e.toString();
+            Log.d("Exception", "editTodo: " + e);
             updateSuccessful = false;
         } finally {
-            //We close the connection with the db if the to do was updated successfully or not
+            //We close the connection with the db for security
             db.close();
         }
         return updateSuccessful;
+    }
+
+    public boolean deleteTodo(int id) {
+
+        //With this boolean we will check if we deleted successfully our To do
+        boolean deletedSuccessfully = true;
+
+        //We make the DB readable to delete it
+        DbHelper dbHelper = new DbHelper(context);
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        try {
+            db.delete(TODOS_TABLE_NAME, "id = ?", new String[]{String.valueOf(id)});
+        } catch (Exception e) {
+            Log.d("Exception", "deleteTodo: " + e);
+            deletedSuccessfully = false;
+        } finally {
+            //We close the connection with the db for security
+            db.close();
+        }
+
+        return deletedSuccessfully;
     }
 
     //We create a method to store our todos on an ArrayList, and a cursor to navigate through the registers
