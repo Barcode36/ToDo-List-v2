@@ -29,9 +29,6 @@ public class MainActivity extends AppCompatActivity implements TodoAdapter.OnTod
     public static final int DETAIL_TODO_REQUEST_CODE = 1;
     public static final String TODO_ID = "todo_id";
 
-    //Declaring a list with LiveData, to be able to observe it
-    private LiveData<List<Todo>> todoList;
-
     //Connecting the UI key parts with the logic
     private RecyclerView recyclerView;
     private FloatingActionButton addButton;
