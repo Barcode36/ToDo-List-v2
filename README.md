@@ -1,4 +1,4 @@
-# MyToDoList
+# MVVM-ToDo-List
 
 ToDo list was created as a light-weight tool to help me organize my daily tasks.
 For this project I've used MVVM architecture, LiveData to get notified of changes and act accordingly, Room DB as an abstraction layer to Sqlite and RecyclerView, with its corresponding adapters.
