@@ -21,10 +21,12 @@
     <string name="cancel">Cancel</string>
     <string name="back">Go back</string>
     <string name="done">Done</string>
-    <string name="undone">Undone</string>
+    <string name="undo">Undo</string>
     <string name="delete">Delete</string>
 
     <string name="add_task_content_description">Add task</string>
     <string name="edit_your_todo">Edit your ToDo</string>
+    <string name="empty">Your ToDo is missing something!</string>
+    <string name="full_empty">Your ToDo needs content!</string>
 
 </resources>

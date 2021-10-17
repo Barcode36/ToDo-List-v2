@@ -1,145 +1,141 @@
 package com.example.todolist.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.todolist.R;
-import com.example.todolist.data.TodoDB;
 import com.example.todolist.model.Todo;
+import com.example.todolist.model.TodoViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 public class DetailTodoActivity extends AppCompatActivity {
 
+    //Declaring variables for our activity
+    private int todoId;
+    private boolean done;
+
+    //Instantiating our viewModel
+    private TodoViewModel todoViewModel;
+
     //Declaring the UI in our activity
-    private EditText todoText;
+    private EditText titleEditText;
+    private EditText subtitleEditText;
     private FloatingActionButton saveButton;
-    private FloatingActionButton cancelButton;
+    private FloatingActionButton goBackButton;
     private FloatingActionButton deleteButton;
     private FloatingActionButton setDoneButton;
-    private TextView isDoneText;
-
-    //Instantiating a new To Do object and its id on the DB
-    private Todo todo;
-
-    //Declaring the private variables
-    private int id;
-    private boolean successfullyModified;
+    private TextView isDoneTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detailed_todo);
 
-        todoText = findViewById(R.id.editTodoEditText);
+        titleEditText = findViewById(R.id.titleEditTodo);
+        subtitleEditText = findViewById(R.id.subtitleEditTodo);
+
         saveButton = findViewById(R.id.saveEditTodoButton);
-        cancelButton = findViewById(R.id.goBackEditTodoButton);
+        goBackButton = findViewById(R.id.goBackEditTodoButton);
         deleteButton = findViewById(R.id.deleteEditTodoButton);
         setDoneButton = findViewById(R.id.setDoneEditTodoButton);
-        isDoneText = findViewById(R.id.isDoneTextView);
+        isDoneTextView = findViewById(R.id.isDoneEditTodoTextView);
 
-        //We check if savedInstanceState already contains the info we need to fill our editText
-        if (savedInstanceState == null) {
-            //Then, we wanna know if the To Do id is correctly stored in the data we passed to this activity
-            Bundle extras = getIntent().getExtras();
-            if (extras != null) {
-                //And if they are not null, we get the Id we added to the intent extras'
-                id = extras.getInt("id");
-            } else {
-                id = Integer.parseInt(null);
+        //We instantiate thew ViewModelProvider using AndroidViewModelFactory to assign it to our viewModel object
+        todoViewModel = new ViewModelProvider.AndroidViewModelFactory(DetailTodoActivity.this
+                .getApplication())
+                .create(TodoViewModel.class);
+
+        //Receiving info that comes with the intent to identify which to do we are selecting with the viewModel
+        if (getIntent().hasExtra(MainActivity.TODO_ID)) {
+            todoId = getIntent().getIntExtra(MainActivity.TODO_ID, 0);
+
+            todoViewModel.get(todoId).observe(this, todo -> {
+                if (todo != null) {
+                    titleEditText.setText(todo.getTitle());
+                    subtitleEditText.setText(todo.getSubtitle());
+                    if (todo.isDone()) {
+                        done = true;
+                        isDoneTextView.setText(R.string.undo);
+                        setDoneButton.setImageResource(R.drawable.ic_baseline_clear_24);
+                    } else {
+                        done = false;
+                        isDoneTextView.setText(R.string.done);
+                        setDoneButton.setImageResource(R.drawable.ic_baseline_done_24);
+                    }
+                }
+            });
+        }
+
+        //Handling tap in the "Go back" Button to get the user to the MainActivity
+        goBackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
-        } else {
-            //If we already have the Id loaded, we just put it on our variable
-            id = (int) savedInstanceState.getSerializable("Id");
-        }
+        });
 
-        //We instantiate our db and get the info for the desired item (with its id to get it from the db)
-        TodoDB db = new TodoDB(this);
-        todo = db.getTodo(id);
-
-        //We check if the item is null and if not, we get the data from it to our activity UI
-        if (todo != null) {
-            todoText.setText(todo.getTitle());
-        }
-
-        //We check if the To do is done or not to show a different text about the task state (done / not done)
-        if (todo.isDone()) {
-            isDoneText.setText("Undone");
-            setDoneButton.setImageResource(R.drawable.ic_baseline_clear_24);
-        } else {
-            isDoneText.setText("Set done");
-            setDoneButton.setImageResource(R.drawable.ic_baseline_done_24);
-        }
-
-        //Handling tap in the "Save" button and calling the method we created to update the to do
+        //Handling tap in the "Save" Button to save our to do
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Checking if there's text in the editText where the user modifies the To Do
-                if (todoText.getText().length() > 0) {
-                    successfullyModified = db.editTodo(id, todoText.getText().toString(), db.getTodo(id).isDone());
-
-                    //If the update was successful, we notify the user and move to the To Do's list. If it wasn't, we just notify and stay
-                    if (successfullyModified) {
-                        Toast.makeText(DetailTodoActivity.this, "Your ToDo was saved! :)", Toast.LENGTH_SHORT).show();
-                        finish();
-                    } else {
-                        Toast.makeText(DetailTodoActivity.this, "There was an error I need to solve :/", Toast.LENGTH_SHORT).show();
-                    }
-
-                } else {
-                    Toast.makeText(DetailTodoActivity.this, "This ToDo will be empty now :(", Toast.LENGTH_SHORT).show();
-                }
+                modifyTodoData("edit");
             }
         });
 
-        //Handling tap in the "Go back" Button to get the user to the MainActivity
-        cancelButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-
-        //Handling tap on the "Delete" Button to delete the task and move the user to the main screen
+        //Handling tap in the "Delete" Button to delete our to dos
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                successfullyModified = db.deleteTodo(id);
-
-                //If it was deleted successfully, we notify the user and move to the To Do's list. If it wasn't, we just notify and stay
-                if (successfullyModified) {
-                    Toast.makeText(DetailTodoActivity.this, "Your ToDo was deleted!", Toast.LENGTH_SHORT).show();
-                    finish();
-                } else {
-                    Toast.makeText(DetailTodoActivity.this, "There was an error I need to solve :/", Toast.LENGTH_SHORT).show();
-                }
-
-                finish();
-
+                modifyTodoData("delete");
             }
         });
 
+        //Handling tap in the "Done/Undone" Button to set the state of our to do
         setDoneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean todoState = db.getTodo(id).isDone();
-
-                 successfullyModified = db.editTodo(id, db.getTodo(id).getTitle(), !todoState);
-
-                //If it was updated successfully, we notify the user and go back home
-                if (successfullyModified) {
-                    Toast.makeText(DetailTodoActivity.this, "Your ToDo was modified!", Toast.LENGTH_SHORT).show();
-                    finish();
+                if (done) {
+                    done = false;
+                    isDoneTextView.setText(R.string.done);
+                    setDoneButton.setImageResource(R.drawable.ic_baseline_done_24);
                 } else {
-                    Toast.makeText(DetailTodoActivity.this, "There was an error I need to solve :/", Toast.LENGTH_SHORT).show();
+                    done = true;
+                    isDoneTextView.setText(R.string.undo);
+                    setDoneButton.setImageResource(R.drawable.ic_baseline_clear_24);
                 }
             }
         });
 
     }
+
+    private void modifyTodoData(String action) {
+        String title = titleEditText.getText().toString();
+        String subtitle = subtitleEditText.getText().toString();
+
+        if (TextUtils.isEmpty(title) || TextUtils.isEmpty(subtitle)) {
+            Snackbar.make(titleEditText, R.string.empty, Snackbar.LENGTH_SHORT)
+                    .show();
+        } else {
+            Todo todo = new Todo();
+            todo.setId(todoId);
+            todo.setTitle(title);
+            todo.setSubtitle(subtitle);
+            todo.setDone(done);
+            if (action.equals("delete"))
+                todoViewModel.delete(todo);
+            else if (action.equals("edit"))
+                todoViewModel.update(todo);
+            finish();
+        }
+    }
+
 }

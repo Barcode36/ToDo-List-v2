@@ -1,22 +1,30 @@
 package com.example.todolist.model;
 
-import android.content.ContentValues;
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 /**
  * This is our Model for a to do item
- * It contains a title and a boolean to check if the task is completed or not
+ * It contains a title, an id and a boolean to check if the task is completed or not
  */
-
+@Entity(tableName = "todo_table")
 public class Todo {
 
-    private String title;
-    private boolean done;
+    @PrimaryKey(autoGenerate = true)
     private int id;
 
-    public Todo(String title, boolean done, int id) {
+    private String title;
+
+    private String subtitle;
+
+    private boolean done;
+
+    public Todo(@NonNull String title, String subtitle, boolean done) {
         this.title = title;
+        this.subtitle = subtitle;
         this.done = done;
-        this.id = id;
     }
 
     public Todo() {
@@ -30,6 +38,10 @@ public class Todo {
     public void setTitle(String title) {
         this.title = title;
     }
+
+    public String getSubtitle() { return subtitle; }
+
+    public void setSubtitle(String subtitle) { this.subtitle = subtitle; }
 
     public boolean isDone() {
         return done;

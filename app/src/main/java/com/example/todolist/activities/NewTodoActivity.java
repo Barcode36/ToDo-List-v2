@@ -1,14 +1,12 @@
 package com.example.todolist.activities;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.os.Build;
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -16,57 +14,70 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.todolist.R;
-import com.example.todolist.data.TodoDB;
+import com.example.todolist.model.TodoViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import java.util.Random;
 
 public class NewTodoActivity extends AppCompatActivity {
 
+    //Declaring private variables for our activity
+    public static final String TITLE_REPLY = "title_reply";
+    public static final String SUBTITLE_REPLY = "subtitle_reply";
+    public static final String DONE_REPLY = "done_reply";
+    private boolean done = false;
+
+    //Instantiating our viewModel
+    private TodoViewModel todoViewModel;
+
     //Declaring the UI in our activity
-    private EditText todoEditText;
+    private EditText titleEditText;
+    private EditText subtitleEditText;
     private FloatingActionButton saveButton;
     private FloatingActionButton goBackButton;
     private FloatingActionButton setDoneButton;
     private TextView isDoneTextView;
-
-    //Declaring the private varibles
-    private boolean successfullyAdded;
-    private boolean done = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_todo);
 
-        todoEditText = findViewById(R.id.editTodoEditText);
-        saveButton = findViewById(R.id.addNewTodoButton);
-        goBackButton = findViewById(R.id.goBackNewTodoButton);
-        setDoneButton = findViewById(R.id.setDoneEditTodoButton);
-        isDoneTextView = findViewById(R.id.isDoneTextView);
+        titleEditText = findViewById(R.id.titleAddTodo);
+        subtitleEditText = findViewById(R.id.subtitleAddTodo);
+
+        saveButton = findViewById(R.id.saveAddTodoButton);
+        goBackButton = findViewById(R.id.goBackAddTodoButton);
+        setDoneButton = findViewById(R.id.setDoneAddTodoButton);
+        isDoneTextView = findViewById(R.id.isDoneAddTodoButton);
 
         // TODO: 11/10/2021 - Add a system to rotate between different hints
-        todoEditText.setHint(R.string.add_new_todo_hint0);
+        titleEditText.setHint(R.string.add_new_todo_hint0);
 
-        TodoDB db = new TodoDB(getApplicationContext());
+        //We instantiate thew ViewModelProvider using AndroidViewModelFactory to assign it to our viewModel object
+        todoViewModel = new ViewModelProvider.AndroidViewModelFactory(NewTodoActivity.this
+                .getApplication())
+                .create(TodoViewModel.class);
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (todoEditText.getText().length() > 0) {
-                    successfullyAdded = db.insertTodo(todoEditText.getText().toString(), done);
+                Intent replyIntent = new Intent();
 
-                    //If the update was successful, we notify the user and move to the To Do's list. If it wasn't, we just notify and stay
-                    if (successfullyAdded) {
-                        Toast.makeText(NewTodoActivity.this, "Your ToDo was created :)", Toast.LENGTH_SHORT).show();
-                        cleanUpAndSetup();
-                        finish();
-                    } else {
-                        Toast.makeText(NewTodoActivity.this, "There was an error I need to solve :/", Toast.LENGTH_SHORT).show();
-                    }
+                if (!TextUtils.isEmpty(titleEditText.getText().toString()) && !TextUtils.isEmpty(subtitleEditText.getText().toString())) {
+
+                    String title = titleEditText.getText().toString();
+                    String subtitle = subtitleEditText.getText().toString();
+
+                    replyIntent.putExtra(TITLE_REPLY, title);
+                    replyIntent.putExtra(SUBTITLE_REPLY, subtitle);
+                    replyIntent.putExtra(DONE_REPLY, done);
+                    setResult(RESULT_OK, replyIntent);
+
                 } else {
-                    Toast.makeText(NewTodoActivity.this, "This ToDo will be empty :(", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NewTodoActivity.this, R.string.full_empty, Toast.LENGTH_SHORT).show();
+                    setResult(RESULT_CANCELED, replyIntent);
                 }
+                finish();
+                cleanUpAndSetup();
             }
         });
 
@@ -86,7 +97,7 @@ public class NewTodoActivity extends AppCompatActivity {
                     done = false;
                     setDoneButton.setImageResource(R.drawable.ic_baseline_done_24);
                 } else {
-                    isDoneTextView.setText(R.string.undone);
+                    isDoneTextView.setText(R.string.undo);
                     done = true;
                     setDoneButton.setImageResource(R.drawable.ic_baseline_clear_24);
                 }
@@ -96,10 +107,11 @@ public class NewTodoActivity extends AppCompatActivity {
     }
 
     /**
-     * Method to clean the editText and close the soft keyboard
+     * Method to clean the text fields and close the soft keyboard
      */
     private void cleanUpAndSetup() {
-        todoEditText.setText("");
+        titleEditText.setText("");
+        subtitleEditText.setText("");
 
         View view = this.getCurrentFocus();
         if (view != null) {

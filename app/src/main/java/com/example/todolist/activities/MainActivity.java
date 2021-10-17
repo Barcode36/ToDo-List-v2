@@ -1,34 +1,44 @@
 package com.example.todolist.activities;
 
-import androidx.appcompat.app.AlertDialog;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 
 import com.example.todolist.R;
 import com.example.todolist.adapter.TodoAdapter;
-import com.example.todolist.data.TodoDB;
 import com.example.todolist.model.Todo;
+import com.example.todolist.model.TodoViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements TodoAdapter.OnTodoClickListener {
+
+    //Declaring variables that I need to move to the activities
+    public static final int NEW_TODO_REQUEST_CODE = 1;
+    public static final int DETAIL_TODO_REQUEST_CODE = 1;
+    public static final String TODO_ID = "todo_id";
+
+    //Declaring a list with LiveData, to be able to observe it
+    private LiveData<List<Todo>> todoList;
 
     //Connecting the UI key parts with the logic
     private RecyclerView recyclerView;
     private FloatingActionButton addButton;
     private CheckBox checkBox;
 
-    //Instance of the DB and the Adapter for my recyclerView
-    private TodoDB db;
+    //Instance of the ViewModel and the Adapter for the recyclerView
+    private TodoViewModel todoViewModel;
     private TodoAdapter todoAdapter;
 
     @Override
@@ -38,11 +48,30 @@ public class MainActivity extends AppCompatActivity {
 
         //Declaring ui in logic the simple way without data binding
         addButton = findViewById(R.id.add_todo_button);
-        recyclerView = findViewById(R.id.todos_recycler_view);
         checkBox = findViewById(R.id.todo_checkbox);
+        recyclerView = findViewById(R.id.todos_recycler_view);
 
-        //We set a LayoutManager, instantiate the DB and set the adapter for recyclerView
-        setupRecyclerViewData();
+        //We instantiate thew ViewModelProvider using AndroidViewModelFactory to assign it to our viewModel object
+        todoViewModel = new ViewModelProvider.AndroidViewModelFactory(MainActivity.this
+            .getApplication())
+            .create(TodoViewModel.class);
+
+        //We observe the content of our viewModel with LiveData and update the recyclerView if it changes
+        todoViewModel.getAllTodos().observe(this, new Observer<List<Todo>>() {
+            @Override
+            public void onChanged(List<Todo> todos) {
+                //With this, we optimize a little bit the recycler's performance
+                recyclerView.setHasFixedSize(true);
+                //Setting a layout manager to our recycler view, to manage how elements are organized
+                recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+                //We assign the required parameters to our adapter
+                todoAdapter = new TodoAdapter(todos, MainActivity.this, MainActivity.this);
+                //We set the recyclerView's adapter to todoAdapter to "configure" it with the code we wrote
+                recyclerView.setAdapter(todoAdapter);
+            }
+        });
+
+
 
         //When we tap the add button, a dialog shows up
         addButton.setOnClickListener(new View.OnClickListener() {
@@ -55,38 +84,47 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void setupRecyclerViewData() {
-        //Setting a layout manager to our recycler view, so it can show our todos
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    /**
+     * Depending on the resultCode we get, we will do one or other thing
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == NEW_TODO_REQUEST_CODE && resultCode == RESULT_OK) {
+            String title = data.getStringExtra(NewTodoActivity.TITLE_REPLY);
+            String subtitle = data.getStringExtra(NewTodoActivity.SUBTITLE_REPLY);
+            boolean done = data.getBooleanExtra(NewTodoActivity.DONE_REPLY, false);
 
-        //We create another db's instance to access data
-        db = new TodoDB(MainActivity.this);
+            assert title != null;
+            Todo todo = new Todo(title, subtitle, done);
 
-        //Instantiate TodoAdapter and pass getAllTodos from parameter. Set adapter to our recyclerView
-        todoAdapter = new TodoAdapter(db.getAllTodos());
-        recyclerView.setAdapter(todoAdapter);
+            todoViewModel.insert(todo);
+        }
     }
 
+    /**
+     * Move user to the new activity waiting for the successful response
+     */
     private void goAddNewTodo() {
-        Intent addTodoActivity = new Intent(getApplicationContext(), NewTodoActivity.class);
-        startActivity(addTodoActivity);
+        Intent goNewTodoActivity = new Intent(getApplicationContext(), NewTodoActivity.class);
+        startActivityForResult(goNewTodoActivity,NEW_TODO_REQUEST_CODE);
+    }
+
+    /**
+     * Move user to the detail activity with the id of the to do selected
+     */
+    private void goDetailTodo(int position) {
+        Todo todo = todoViewModel.getAllTodos().getValue().get(position);
+        Intent goDetailTodoActivity = new Intent(getApplicationContext(), DetailTodoActivity.class);
+        goDetailTodoActivity.putExtra(TODO_ID, todo.getId());
+        startActivityForResult(goDetailTodoActivity, DETAIL_TODO_REQUEST_CODE);
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
+    public void onTodoClicked(int position) {
+        goDetailTodo(position);
     }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        setupRecyclerViewData();
-        //TODO: Esto no es lo correcto, creo, revisar
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
-
 }

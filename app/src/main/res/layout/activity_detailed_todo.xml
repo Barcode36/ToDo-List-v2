@@ -8,7 +8,7 @@
     tools:context=".activities.DetailTodoActivity">
 
     <TextView
-        android:id="@+id/detailedToDoTitle"
+        android:id="@+id/addTodoTitle"
         style="@style/activity_title_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTodoEditText"
+        android:id="@+id/titleEditTodo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -36,110 +36,132 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/detailedToDoTitle"
+        app:layout_constraintTop_toBottomOf="@+id/addTodoTitle"
         app:layout_constraintVertical_bias="0.0"
         android:importantForAutofill="no" />
 
+    <EditText
+        android:id="@+id/subtitleEditTodo"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@drawable/todo_add_background"
+        android:importantForAutofill="no"
+        android:inputType="textMultiLine"
+        android:maxLength="160"
+        android:maxLines="5"
+        android:padding="16dp"
+        android:textColor="@color/secondary_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleEditTodo" />
+
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTodoEditText">
+        app:layout_constraintTop_toBottomOf="@+id/subtitleEditTodo">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp">
+            android:layout_marginRight="16dp"
+            android:orientation="vertical">
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/setDoneEditTodoButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:clickable="true"
+                android:contentDescription="@string/done"
                 android:focusable="true"
                 app:backgroundTint="@color/blue"
                 app:layout_constraintEnd_toStartOf="@+id/saveEditTodoButton"
-                app:layout_constraintTop_toBottomOf="@+id/editTodoEditText"
+                app:layout_constraintTop_toBottomOf="@+id/titleEditTodo"
                 app:srcCompat="@drawable/ic_baseline_done_24"
-                tools:ignore="VectorDrawableCompat"
-                android:contentDescription="@string/done" />
+                tools:ignore="VectorDrawableCompat" />
 
             <TextView
-                android:id="@+id/isDoneTextView"
+                android:id="@+id/isDoneEditTodoTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_4"
-                android:textAlignment="center"
+                android:gravity="center_horizontal"
                 android:text="@string/done"
-                android:textColor="@color/white"
-                android:gravity="center_horizontal" />
+                android:textAlignment="center"
+                android:textColor="@color/white" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp">
+            android:layout_marginRight="16dp"
+            android:orientation="vertical">
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/saveEditTodoButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:clickable="true"
+                android:contentDescription="@string/save"
                 android:focusable="true"
                 app:backgroundTint="@color/green"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTodoEditText"
+                app:layout_constraintTop_toBottomOf="@+id/titleEditTodo"
                 app:srcCompat="@drawable/ic_baseline_save_24"
-                tools:ignore="VectorDrawableCompat"
-                android:contentDescription="@string/save" />
+                tools:ignore="VectorDrawableCompat" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_4"
-                android:textAlignment="center"
+                android:gravity="center_horizontal"
                 android:text="@string/save"
-                android:textColor="@color/white"
-                android:gravity="center_horizontal" />
+                android:textAlignment="center"
+                android:textColor="@color/white" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp">
+            android:layout_marginRight="16dp"
+            android:orientation="vertical">
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/goBackEditTodoButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:clickable="true"
+                android:contentDescription="@string/back"
                 android:focusable="true"
                 app:backgroundTint="@color/primary_color"
                 app:layout_constraintEnd_toStartOf="@+id/saveEditTodoButton"
-                app:layout_constraintTop_toBottomOf="@+id/editTodoEditText"
+                app:layout_constraintTop_toBottomOf="@+id/titleEditTodo"
                 app:srcCompat="@drawable/ic_baseline_arrow_back_24"
-                tools:ignore="VectorDrawableCompat"
-                android:contentDescription="@string/back" />
+                tools:ignore="VectorDrawableCompat" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_4"
-                android:textAlignment="center"
+                android:gravity="center_horizontal"
                 android:text="@string/back"
-                android:textColor="@color/white"
-                android:gravity="center_horizontal" />
+                android:textAlignment="center"
+                android:textColor="@color/white" />
 
         </LinearLayout>
 
@@ -154,22 +176,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:clickable="true"
+                android:contentDescription="@string/delete"
                 android:focusable="true"
                 app:backgroundTint="@color/red"
                 app:layout_constraintEnd_toStartOf="@+id/goBackEditTodoButton"
-                app:layout_constraintTop_toBottomOf="@+id/editTodoEditText"
+                app:layout_constraintTop_toBottomOf="@+id/titleEditTodo"
                 app:srcCompat="@drawable/ic_baseline_delete_24"
-                tools:ignore="VectorDrawableCompat"
-                android:contentDescription="@string/delete" />
+                tools:ignore="VectorDrawableCompat" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_4"
-                android:textAlignment="center"
+                android:gravity="center_horizontal"
                 android:text="@string/delete"
-                android:textColor="@color/white"
-                android:gravity="center_horizontal" />
+                android:textAlignment="center"
+                android:textColor="@color/white" />
 
         </LinearLayout>
 
