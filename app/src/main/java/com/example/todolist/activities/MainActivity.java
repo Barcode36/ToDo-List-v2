@@ -68,8 +68,6 @@ public class MainActivity extends AppCompatActivity implements TodoAdapter.OnTod
             }
         });
 
-
-
         //When we tap the add button, a dialog shows up
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
