@@ -6,8 +6,8 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 /**
- * This is our Model for a to do item
- * It contains a title, an id and a boolean to check if the task is completed or not
+ * This is our Model for a to do item, this is the what every to do in our list is made of
+ * It contains a title, subtitle, id and boolean to check if the task is completed or not
  */
 @Entity(tableName = "todo_table")
 public class Todo {
@@ -21,10 +21,13 @@ public class Todo {
 
     private boolean done;
 
-    public Todo(@NonNull String title, String subtitle, boolean done) {
+    private int priority;
+
+    public Todo(@NonNull String title, String subtitle, boolean done, int priority) {
         this.title = title;
         this.subtitle = subtitle;
         this.done = done;
+        this.priority = priority;
     }
 
     public Todo() {
@@ -50,6 +53,10 @@ public class Todo {
     public void setDone(boolean done) {
         this.done = done;
     }
+
+    public int getPriority() { return priority; }
+
+    public void setPriority(int priority) { this.priority = priority; }
 
     public int getId() {
         return id;

@@ -21,7 +21,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoHolder> {
     private OnTodoClickListener todoClickListener;
     //Creating an ArrayList of to do objects and creating an instance of Context for using it
     private List<Todo> listTodos;
-    private Context context;
+    final private Context context;
 
     //We create a constructor that needs an arrayList of to dos to fill the recyclerView
     public TodoAdapter(List<Todo> listTodos, Context context, OnTodoClickListener onTodoClickListener) {
@@ -69,6 +69,8 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoHolder> {
             todoTitle = itemView.findViewById(R.id.todo_title);
             todoSubtitle = itemView.findViewById(R.id.todo_subtitle);
             todoCheck = itemView.findViewById(R.id.todo_checkbox);
+
+            todoCheck.setEnabled(false);
 
             //We make the clickListener be equal to the instance of the interface we created
             //and we also attach each element in the RecyclerView to an OnClickListener

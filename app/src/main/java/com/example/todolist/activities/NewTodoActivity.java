@@ -23,7 +23,9 @@ public class NewTodoActivity extends AppCompatActivity {
     public static final String TITLE_REPLY = "title_reply";
     public static final String SUBTITLE_REPLY = "subtitle_reply";
     public static final String DONE_REPLY = "done_reply";
+    public static final String PRIORITY_REPLY = "priority_reply";
     private boolean done = false;
+    private int priority = 0;
 
     //Instantiating our viewModel
     private TodoViewModel todoViewModel;
@@ -70,6 +72,7 @@ public class NewTodoActivity extends AppCompatActivity {
                     replyIntent.putExtra(TITLE_REPLY, title);
                     replyIntent.putExtra(SUBTITLE_REPLY, subtitle);
                     replyIntent.putExtra(DONE_REPLY, done);
+                    replyIntent.putExtra(PRIORITY_REPLY, priority);
                     setResult(RESULT_OK, replyIntent);
 
                 } else {

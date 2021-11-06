@@ -14,8 +14,12 @@ import com.example.todolist.model.Todo;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-//We make sure that Room identifies this as a DB and assign the entities (contained in Todo.class)
-//and also declare the DB version and turn exportSchema to false
+/*
+    This class is where we check if Room DB is created and if not, we create it
+ */
+
+/*We make sure that Room identifies this as a DB and assign the entities (contained in Todo.class)
+and also declare the DB version and turn exportSchema to false*/
 @Database(entities = {Todo.class}, version = 1, exportSchema = false)
 public abstract class TodoRoomDatabase extends RoomDatabase {
 
@@ -28,7 +32,7 @@ public abstract class TodoRoomDatabase extends RoomDatabase {
     public static final ExecutorService databaseWriterExecutor
             = Executors.newFixedThreadPool(THREADS_NUMBER);
 
-    //We use this abstract class to create our Room DB if it doesn't exist and return our instance
+    //We use this abstract class to create our Room DB if it doesn't exist, or if it does, return our db instance
     public static TodoRoomDatabase getDatabase(final Context context) {
         if (INSTANCE == null) {
             synchronized (TodoRoomDatabase.class) {
@@ -52,9 +56,6 @@ public abstract class TodoRoomDatabase extends RoomDatabase {
             databaseWriterExecutor.execute(() -> {
                 TodoDAO todoDAO = INSTANCE.todoDAO();
                 todoDAO.deleteAll();
-
-//                Todo todo = new Todo("Example", true);
-//                todoDAO.insert(todo);
             });
         }
     };

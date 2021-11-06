@@ -11,8 +11,8 @@ import com.example.todolist.data.TodoRepository;
 import java.util.List;
 
 /**
- * We create a ViewModel for our app, that can interact with the repository and the activities and
- * conserve the data even if configuration changes
+ * We create a ViewModel for our app, that can interact with the repository, the activities and
+ * conserve the data even if app configuration changes (screen orientation, etc...)
  */
 
 public class TodoViewModel extends AndroidViewModel {
@@ -31,10 +31,10 @@ public class TodoViewModel extends AndroidViewModel {
     //can interact with the data that the ViewModel is managing
     public LiveData<List<Todo>> getAllTodos() { return allTodos; }
 
-    //With this method, we will insert todos in our repository
+    //With this method, we will insert a to do in our repository
     public static void insert(Todo todo) {todoRepository.insert(todo);}
 
-    //With this method, we will delete one to do in our repository
+    //With this method, we will delete a to do in our repository
     public static void delete(Todo todo) {todoRepository.delete(todo);}
 
     //With this method, we will update a to do in our repository

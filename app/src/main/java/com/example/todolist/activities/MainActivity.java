@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.Toast;
 
 import com.example.todolist.R;
 import com.example.todolist.adapter.TodoAdapter;
@@ -21,6 +22,10 @@ import com.example.todolist.model.TodoViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
+
+/**
+ * This class makes it possible to use our data in the recyclerView and modify it
+ */
 
 public class MainActivity extends AppCompatActivity implements TodoAdapter.OnTodoClickListener {
 
@@ -80,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements TodoAdapter.OnTod
     }
 
     /**
-     * Depending on the resultCode we get, we will do one or other thing
+     * Depending on the resultCode we get, we will act differently
      * @param requestCode
      * @param resultCode
      * @param data
@@ -92,16 +97,17 @@ public class MainActivity extends AppCompatActivity implements TodoAdapter.OnTod
             String title = data.getStringExtra(NewTodoActivity.TITLE_REPLY);
             String subtitle = data.getStringExtra(NewTodoActivity.SUBTITLE_REPLY);
             boolean done = data.getBooleanExtra(NewTodoActivity.DONE_REPLY, false);
+            int priority = data.getIntExtra(NewTodoActivity.PRIORITY_REPLY, 0);
 
             assert title != null;
-            Todo todo = new Todo(title, subtitle, done);
+            Todo todo = new Todo(title, subtitle, done, priority);
 
             todoViewModel.insert(todo);
         }
     }
 
     /**
-     * Move user to the new activity waiting for the successful response
+     * Move user to the new activity waiting for the response
      */
     private void goAddNewTodo() {
         Intent goNewTodoActivity = new Intent(getApplicationContext(), NewTodoActivity.class);

@@ -14,7 +14,7 @@ import java.util.List;
 
 /**
  * We create a Data Access Object Interface for our app, which is where we access to our data with
- * one more level of abstraction. We put annotations so Room knows that this is part of it
+ * one more level of abstraction than with plain SQL. We put annotations so Room knows that this is part of it
  */
 
 @Dao
