@@ -1,9 +1,20 @@
 <resources>
-    <string name="app_name">ToDo</string>
-    <string name="add_todo_title">Add some TODOs!</string>
+    <string name="app_name">Hoy!</string>
 
-    <string name="add_text">Add!</string>
+    <!-- Screen's title -->
+    <string name="edit_todo_screen_title">Edit your ToDo</string>
+    <string name="add_todo_screen_title">New ToDo</string>
 
+    <!-- Actions -->
+    <string name="add_action">Add</string>
+    <string name="save_action">Save</string>
+    <string name="cancel_action">Cancel</string>
+    <string name="go_back_action">Back</string>
+    <string name="set_done_action">Done</string>
+    <string name="set_undone_action">Undo</string>
+    <string name="delete_action">Delete</string>
+
+    <!-- New tasks hint -->
     <string name="add_new_todo_hint0">I\'ll go to the gym at 18:30…</string>
     <string name="add_new_todo_hint1">Read a book for 30 mins…</string>
     <string name="add_new_todo_hint2">Do my WOD with friends…</string>
@@ -12,21 +23,14 @@
     <string name="add_new_todo_hint5">Practice german for 1h…</string>
     <string name="add_new_todo_hint6">Visit family after lunch…</string>
 
-    <string name="example_task">Example task</string>
-    <string name="add_new_todo_title">New ToDo</string>
-    <string name="example_topic">Work</string>
+    <!-- Alerts -->
+    <string name="todo_half_empty_alert">Your ToDo needs something more…</string>
+    <string name="todo_full_empty_alert">Your ToDo needs content…</string>
 
-    <string name="add">Add</string>
-    <string name="save">Save</string>
-    <string name="cancel">Cancel</string>
-    <string name="back">Back</string>
-    <string name="done">Done</string>
-    <string name="undo">Undo</string>
-    <string name="delete">Delete</string>
+    <!-- Example strings -->
+    <string name="example_todo_title">Example task title</string>
+    <string name="example_todo_description">This is an example description for a new ToDo</string>
 
-    <string name="add_task_content_description">Add task</string>
-    <string name="edit_your_todo">Edit your ToDo</string>
-    <string name="empty">Your ToDo is missing something!</string>
-    <string name="full_empty">Your ToDo needs content!</string>
-
+    <!-- Content description strings -->
+    <string name="new_todo_button_description">Add a new task</string>
 </resources>

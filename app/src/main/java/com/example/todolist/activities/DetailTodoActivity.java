@@ -3,19 +3,17 @@ package com.example.todolist.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.todolist.R;
 import com.example.todolist.model.Todo;
 import com.example.todolist.model.TodoViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 public class DetailTodoActivity extends AppCompatActivity {
 
@@ -64,11 +62,11 @@ public class DetailTodoActivity extends AppCompatActivity {
                     subtitleEditText.setText(todo.getSubtitle());
                     if (todo.isDone()) {
                         done = true;
-                        isDoneTextView.setText(R.string.undo);
+                        isDoneTextView.setText(R.string.set_undone_action);
                         setDoneButton.setImageResource(R.drawable.ic_baseline_clear_24);
                     } else {
                         done = false;
-                        isDoneTextView.setText(R.string.done);
+                        isDoneTextView.setText(R.string.set_done_action);
                         setDoneButton.setImageResource(R.drawable.ic_baseline_done_24);
                     }
                 }
@@ -105,11 +103,11 @@ public class DetailTodoActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (done) {
                     done = false;
-                    isDoneTextView.setText(R.string.done);
+                    isDoneTextView.setText(R.string.set_done_action);
                     setDoneButton.setImageResource(R.drawable.ic_baseline_done_24);
                 } else {
                     done = true;
-                    isDoneTextView.setText(R.string.undo);
+                    isDoneTextView.setText(R.string.set_undone_action);
                     setDoneButton.setImageResource(R.drawable.ic_baseline_clear_24);
                 }
             }
@@ -122,8 +120,7 @@ public class DetailTodoActivity extends AppCompatActivity {
         String subtitle = subtitleEditText.getText().toString();
 
         if (TextUtils.isEmpty(title) || TextUtils.isEmpty(subtitle)) {
-            Snackbar.make(titleEditText, R.string.empty, Snackbar.LENGTH_SHORT)
-                    .show();
+            Toast.makeText(DetailTodoActivity.this, R.string.todo_full_empty_alert, Toast.LENGTH_SHORT).show();
         } else {
             Todo todo = new Todo();
             todo.setId(todoId);

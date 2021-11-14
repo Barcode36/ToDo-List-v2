@@ -2,7 +2,6 @@ package com.example.todolist.activities;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -10,10 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
-import android.widget.Toast;
 
 import com.example.todolist.R;
 import com.example.todolist.adapter.TodoAdapter;
@@ -117,7 +114,7 @@ public class MainActivity extends AppCompatActivity implements TodoAdapter.OnTod
     /**
      * Move user to the detail activity with the id of the to do selected
      */
-    private void goDetailTodo(int position) {
+    private void goDetailedTodo(int position) {
         Todo todo = todoViewModel.getAllTodos().getValue().get(position);
         Intent goDetailTodoActivity = new Intent(getApplicationContext(), DetailTodoActivity.class);
         goDetailTodoActivity.putExtra(TODO_ID, todo.getId());
@@ -126,6 +123,6 @@ public class MainActivity extends AppCompatActivity implements TodoAdapter.OnTod
 
     @Override
     public void onTodoClicked(int position) {
-        goDetailTodo(position);
+        goDetailedTodo(position);
     }
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,7 +12,7 @@
         android:id="@+id/app_title_text_view"
         android:layout_marginBottom="8dp"
         android:text="@string/app_name"
-        android:textSize="@dimen/font_size_24"
+        android:textSize="@dimen/font_size_26"
         app:layout_constraintBottom_toTopOf="@+id/todos_recycler_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -43,7 +44,7 @@
         android:clickable="true"
         android:elevation="4dp"
         android:src="@drawable/ic_baseline_add_24"
-        android:contentDescription="@string/add_task_content_description"
+        android:contentDescription="@string/new_todo_button_description"
         android:focusable="true"
         tools:targetApi="lollipop" />
 

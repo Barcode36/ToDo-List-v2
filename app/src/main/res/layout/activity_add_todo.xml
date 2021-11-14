@@ -12,7 +12,7 @@
         style="@style/activity_title_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/add_new_todo_title"
+        android:text="@string/add_todo_screen_title"
         android:textSize="@dimen/font_size_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -86,7 +86,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:clickable="true"
-                android:contentDescription="@string/done"
+                android:contentDescription="@string/set_done_action"
                 android:focusable="true"
                 app:backgroundTint="@color/blue"
                 app:layout_constraintEnd_toStartOf="@+id/saveAddTodoButton"
@@ -100,7 +100,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_4"
                 android:gravity="center_horizontal"
-                android:text="@string/done"
+                android:text="@string/set_done_action"
                 android:textAlignment="center"
                 android:textColor="@color/white" />
 
@@ -118,7 +118,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:clickable="true"
-                android:contentDescription="@string/save"
+                android:contentDescription="@string/save_action"
                 android:focusable="true"
                 app:backgroundTint="@color/green"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -131,7 +131,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_4"
                 android:gravity="center_horizontal"
-                android:text="@string/save"
+                android:text="@string/save_action"
                 android:textAlignment="center"
                 android:textColor="@color/white" />
 
@@ -148,7 +148,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:clickable="true"
-                android:contentDescription="@string/back"
+                android:contentDescription="@string/go_back_action"
                 android:focusable="true"
                 app:backgroundTint="@color/primary_color"
                 app:layout_constraintEnd_toStartOf="@+id/saveAddTodoButton"
@@ -161,7 +161,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_4"
                 android:gravity="center_horizontal"
-                android:text="@string/back"
+                android:text="@string/go_back_action"
                 android:textAlignment="center"
                 android:textColor="@color/white" />
 

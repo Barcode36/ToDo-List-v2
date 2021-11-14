@@ -76,7 +76,7 @@ public class NewTodoActivity extends AppCompatActivity {
                     setResult(RESULT_OK, replyIntent);
 
                 } else {
-                    Toast.makeText(NewTodoActivity.this, R.string.full_empty, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NewTodoActivity.this, R.string.todo_full_empty_alert, Toast.LENGTH_SHORT).show();
                     setResult(RESULT_CANCELED, replyIntent);
                 }
                 finish();
@@ -96,11 +96,11 @@ public class NewTodoActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 if (done) {
-                    isDoneTextView.setText(R.string.done);
+                    isDoneTextView.setText(R.string.set_done_action);
                     done = false;
                     setDoneButton.setImageResource(R.drawable.ic_baseline_done_24);
                 } else {
-                    isDoneTextView.setText(R.string.undo);
+                    isDoneTextView.setText(R.string.set_undone_action);
                     done = true;
                     setDoneButton.setImageResource(R.drawable.ic_baseline_clear_24);
                 }
