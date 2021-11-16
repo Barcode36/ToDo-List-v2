@@ -1,4 +1,4 @@
-package com.example.todolist.util;
+package com.adrict9.timeless.util;
 
 import android.content.Context;
 
@@ -8,8 +8,8 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import com.example.todolist.data.TodoDAO;
-import com.example.todolist.model.Todo;
+import com.adrict9.timeless.data.TodoDAO;
+import com.adrict9.timeless.model.Todo;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

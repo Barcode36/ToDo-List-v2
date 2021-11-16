@@ -1,4 +1,4 @@
-package com.example.todolist.model;
+package com.adrict9.timeless.model;
 
 import android.app.Application;
 
@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.example.todolist.data.TodoRepository;
+import com.adrict9.timeless.data.TodoRepository;
 
 import java.util.List;
 
