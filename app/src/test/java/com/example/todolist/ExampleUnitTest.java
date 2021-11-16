@@ -1,4 +1,4 @@
-package com.adrict9.timeless;
+package com.example.todolist;
 
 import org.junit.Test;
 

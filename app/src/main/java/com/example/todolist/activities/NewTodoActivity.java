@@ -1,4 +1,4 @@
-package com.adrict9.timeless.activities;
+package com.example.todolist.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -13,8 +13,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.adrict9.timeless.R;
-import com.adrict9.timeless.model.TodoViewModel;
+import com.example.todolist.R;
+import com.example.todolist.model.TodoViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class NewTodoActivity extends AppCompatActivity {

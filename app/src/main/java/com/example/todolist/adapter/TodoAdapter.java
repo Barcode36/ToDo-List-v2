@@ -1,4 +1,4 @@
-package com.adrict9.timeless.adapter;
+package com.example.todolist.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,8 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.adrict9.timeless.R;
-import com.adrict9.timeless.model.Todo;
+import com.example.todolist.R;
+import com.example.todolist.model.Todo;
 
 import java.util.List;
 
