@@ -95,10 +95,10 @@ public class MainActivity extends AppCompatActivity implements TodoAdapter.OnTod
             String title = data.getStringExtra(NewTodoActivity.TITLE_REPLY);
             String subtitle = data.getStringExtra(NewTodoActivity.SUBTITLE_REPLY);
             boolean done = data.getBooleanExtra(NewTodoActivity.DONE_REPLY, false);
-            int priority = data.getIntExtra(NewTodoActivity.PRIORITY_REPLY, 0);
+            int importance = data.getIntExtra(NewTodoActivity.PRIORITY_REPLY, 0);
 
             assert title != null;
-            Todo todo = new Todo(title, subtitle, done, Importance.HIGH, );
+            Todo todo = new Todo(title, subtitle, done, importance, );
 
             todoViewModel.insert(todo);
         }
