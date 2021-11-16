@@ -1,4 +1,4 @@
-package com.example.todolist.util;
+package com.adrict9.timeless.util;
 
 import android.app.Activity;
 import android.content.Context;

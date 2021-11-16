@@ -1,4 +1,4 @@
-package com.example.todolist.data;
+package com.adrict9.timeless.data;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
@@ -8,7 +8,7 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.example.todolist.model.Todo;
+import com.adrict9.timeless.model.Todo;
 
 import java.util.List;
 

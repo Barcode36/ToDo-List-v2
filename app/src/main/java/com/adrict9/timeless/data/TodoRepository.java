@@ -1,11 +1,11 @@
-package com.example.todolist.data;
+package com.adrict9.timeless.data;
 
 import android.app.Application;
 
 import androidx.lifecycle.LiveData;
 
-import com.example.todolist.model.Todo;
-import com.example.todolist.util.TodoRoomDatabase;
+import com.adrict9.timeless.model.Todo;
+import com.adrict9.timeless.util.TodoRoomDatabase;
 
 import java.util.List;
 
