@@ -1,4 +1,4 @@
-package com.example.todolist.activities;
+package com.adrict9.timeless.activities;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,10 +12,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
 
-import com.example.todolist.R;
-import com.example.todolist.adapter.TodoAdapter;
-import com.example.todolist.model.Todo;
-import com.example.todolist.model.TodoViewModel;
+import com.adrict9.timeless.R;
+import com.adrict9.timeless.adapter.TodoAdapter;
+import com.adrict9.timeless.model.Importance;
+import com.adrict9.timeless.model.Todo;
+import com.adrict9.timeless.model.TodoViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
@@ -97,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements TodoAdapter.OnTod
             int priority = data.getIntExtra(NewTodoActivity.PRIORITY_REPLY, 0);
 
             assert title != null;
-            Todo todo = new Todo(title, subtitle, done, priority);
+            Todo todo = new Todo(title, subtitle, done, Importance.HIGH, );
 
             todoViewModel.insert(todo);
         }

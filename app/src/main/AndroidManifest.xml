@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.todolist">
+    package="com.adrict9.timeless">
 
     <application
         android:allowBackup="true"
@@ -9,9 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TODOList">
-        <activity android:name=".activities.DetailTodoActivity"></activity>
-        <activity android:name=".activities.NewTodoActivity" />
-        <activity android:name=".activities.MainActivity">
+        <activity android:name="com.adrict9.timeless.activities.DetailTodoActivity"></activity>
+        <activity android:name="com.adrict9.timeless.activities.NewTodoActivity" />
+        <activity android:name="com.adrict9.timeless.activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
